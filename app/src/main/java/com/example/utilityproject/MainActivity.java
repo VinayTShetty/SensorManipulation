@@ -142,11 +142,14 @@ public class MainActivity extends AppCompatActivity {
              //   Log.d(TAG, "processData: Number of Sensor= "+Integer.parseInt(sessionCompletedData.getNumberOfSensors(),16));
                // Log.d(TAG, "processData: Sensor Data Length= "+COMPLETE_SENSOR_DATA.length());
                 for (int counter_1 = 0; counter_1 <sessionCompletedData.sensorID_sensorTypeList.size(); counter_1++) {
-                    Log.d(TAG, "SENSOR ID= "+sessionCompletedData.sensorID_sensorTypeList.get(counter_1).getSensorID()+" SENSOR TYPE= "+sessionCompletedData.sensorID_sensorTypeList.get(counter_1).getSensorType()+ " Number of Data = "+sessionCompletedData.sensorID_sensorTypeList.get(counter_1).getSensorIDData().size());
-
+//                    Log.d(TAG, "SENSOR ID= "+sessionCompletedData.sensorID_sensorTypeList.get(counter_1).getSensorID()+" SENSOR TYPE= "+sessionCompletedData.sensorID_sensorTypeList.get(counter_1).getSensorType()+ " Number of Data = "+sessionCompletedData.sensorID_sensorTypeList.get(counter_1).getSensorIDData().size());
+                    System.out.println("\nSENSOR ID= "+sessionCompletedData.sensorID_sensorTypeList.get(counter_1).getSensorID());
+                    System.out.println("SENSOR TYPE  "+sessionCompletedData.sensorID_sensorTypeList.get(counter_1).getSensorType());
+                    System.out.println("Number of Data Packets = "+sessionCompletedData.sensorID_sensorTypeList.get(counter_1).getSensorIDData().size());
                     for (int individualSensorData = 0; individualSensorData <sessionCompletedData.sensorID_sensorTypeList.get(counter_1).getSensorIDData().size() ; individualSensorData++) {
-                        Log.d(TAG, "processData: "+sessionCompletedData.sensorID_sensorTypeList.get(counter_1).getSensorIDData().get(individualSensorData)+",");
-                    //    System.out.print(sessionCompletedData.sensorID_sensorTypeList.get(counter_1).getSensorIDData().get(individualSensorData)+",");
+                       Log.d(TAG, ""+sessionCompletedData.sensorID_sensorTypeList.get(counter_1).getSensorIDData().get(individualSensorData)+",");
+                     //  System.out.print(sessionCompletedData.sensorID_sensorTypeList.get(counter_1).getSensorIDData().get(individualSensorData)+",");
+                     //   System.out.print(sessionCompletedData.sensorID_sensorTypeList.get(counter_1).getSensorIDData().get(individualSensorData)+",");
                     }
 
                 }

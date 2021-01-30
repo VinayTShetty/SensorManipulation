@@ -27,7 +27,7 @@ import static com.example.utilityproject.UtilityClass.getStringOfParticularLengt
 public class MainActivity extends AppCompatActivity {
     TextView textView;
     final Handler handler = new Handler(Looper.getMainLooper());
-    public static final String TAG=MainActivity.class.getName()+"SESSION_DATA_PARSING";
+    public static final String TAG=MainActivity.class.getName();
     private static String COMPLETE_SENSOR_DATA="";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -146,6 +146,7 @@ public class MainActivity extends AppCompatActivity {
 
                     for (int individualSensorData = 0; individualSensorData <sessionCompletedData.sensorID_sensorTypeList.get(counter_1).getSensorIDData().size() ; individualSensorData++) {
                         Log.d(TAG, "processData: "+sessionCompletedData.sensorID_sensorTypeList.get(counter_1).getSensorIDData().get(individualSensorData)+",");
+                    //    System.out.print(sessionCompletedData.sensorID_sensorTypeList.get(counter_1).getSensorIDData().get(individualSensorData)+",");
                     }
 
                 }

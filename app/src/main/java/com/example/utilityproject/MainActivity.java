@@ -43,8 +43,6 @@ public class MainActivity extends AppCompatActivity {
                 counter=1;
             }
         }
-
-
        processData();
     }
 
@@ -98,6 +96,7 @@ public class MainActivity extends AppCompatActivity {
         sessionCompletedData.setSensorCompletedDataConcatenated("");
         sessionCompletedData.sensorID_sensorTypeList=new ArrayList<>();
         COMPLETE_SENSOR_DATA="";
+
         for (int i = 0; i <hexStringList.size() ; i++) {
             if(hexStringList.get(i).substring(4,6).equalsIgnoreCase("FF")){
                 /**
@@ -115,7 +114,10 @@ public class MainActivity extends AppCompatActivity {
                 String stringValueForthisBlock=hexStringList.get(i);
                 String particularPacektToProcess=getStringOfParticularLength(stringValueForthisBlock);
                 while (particularPacektToProcess.length()>0){
-                    sessionCompletedData.sensorID_sensorTypeList.add(new SensorID_SensorType(particularPacektToProcess,particularPacektToProcess));
+                    SensorID_SensorType sensorID_sensorType=new SensorID_SensorType();
+                    sensorID_sensorType.setSensorID(particularPacektToProcess);
+                    sensorID_sensorType.setSensorType(particularPacektToProcess);
+                    sessionCompletedData.sensorID_sensorTypeList.add(sensorID_sensorType);
                     particularPacektToProcess=particularPacektToProcess.substring(6);
                 }
             }else if(hexStringList.get(i).substring(4,6).equalsIgnoreCase("FC")){

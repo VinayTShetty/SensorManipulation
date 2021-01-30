@@ -13,6 +13,9 @@ public class SensorID_SensorType {
         this.sensorType =sensorType.substring(4,6);
     }
 
+    public SensorID_SensorType() {
+    }
+
     public String getSensorID() {
         return sensorID;
     }

@@ -133,7 +133,7 @@ public class MainActivity extends AppCompatActivity {
                ArrayList<String> eachIndividualSensorData= sessionCompletedData.sensorID_sensorTypeList.get(counter).getSensorIDData();
                     eachIndividualSensorData.add(indiviadualString);
                     counter++;
-                    if(counter==numberOFSensors-1){
+                    if(counter>numberOFSensors-1){
                         counter=0;
                     }
                 }

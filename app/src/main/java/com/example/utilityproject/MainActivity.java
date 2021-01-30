@@ -17,7 +17,9 @@ import com.example.utilityproject.Dataparsing.SessionCompletedData;
 
 import java.nio.ByteBuffer;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
+import java.util.List;
 
 import static com.example.utilityproject.UtilityClass.getOnlySensorDataPackets;
 import static com.example.utilityproject.UtilityClass.getStringOfParticularLength;
@@ -31,10 +33,30 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-            String data="100FFC00050A280A290A280A2B0A2D0A2C00";
-        System.out.println("------------------>"+data.substring(10,24+10));
-        processData();
+        String sensordataToProcess="0A280A290A280A280A290A280A280A290A280A280A290A280A280A290A280A280A290A280A280A290A280A280A290A280A280A290A280A280A290A280A280A290A280A280A290A280A280A290A280A280A290A280A280A290A280A280A290A280A280A290A280A280A290A280A280A290A280A280A290A280A280A290A280A280A290A280A280A290A280A280A290A280A280A290A280A280A29";
+      List<String> stringSplitted= splitEqually(sensordataToProcess,4);
+      int counter=1;
+        for (String indiviadualString:stringSplitted ) {
+            System.out.println("Each Sensor Data= "+indiviadualString+" Counter= "+counter);
+            counter++;
+            if(counter>11){
+                counter=1;
+            }
+        }
 
+
+       processData();
+    }
+
+    public static List<String> splitEqually(String text, int size) {
+        // Give the list the right capacity to start with. You could use an array
+        // instead if you wanted.
+        List<String> ret = new ArrayList<String>((text.length() + size - 1) / size);
+
+        for (int start = 0; start < text.length(); start += size) {
+            ret.add(text.substring(start, Math.min(text.length(), start + size)));
+        }
+        return ret;
     }
 
     private void processData(){
@@ -103,7 +125,7 @@ public class MainActivity extends AppCompatActivity {
                 String stringValueForthisBlock=hexStringList.get(i);
 
                 COMPLETE_SENSOR_DATA=COMPLETE_SENSOR_DATA+getOnlySensorDataPackets(stringValueForthisBlock);
-                Log.d(TAG, "processData: COMPLETE SENSOR DATA= "+COMPLETE_SENSOR_DATA);
+               // Log.d(TAG, "processData: COMPLETE SENSOR DATA= "+COMPLETE_SENSOR_DATA);
 
 
             }else if(hexStringList.get(i).substring(4,6).equalsIgnoreCase("FB")){
@@ -117,6 +139,7 @@ public class MainActivity extends AppCompatActivity {
                     Log.d(TAG, "onCreate: SENSOR_ID_TYPES "+" SENSOR ID= "+sessionCompletedData.sensorID_sensorTypeList.get(counter).getSensorID()+" SENSOR TYPE= "+sessionCompletedData.sensorID_sensorTypeList.get(counter).getSensorType());
                 }
                 Log.d(TAG, "onCreate: COMPLETE_SENSOR_DATA= "+COMPLETE_SENSOR_DATA+" Length= \n"+COMPLETE_SENSOR_DATA.length());
+
             }
         }
     }

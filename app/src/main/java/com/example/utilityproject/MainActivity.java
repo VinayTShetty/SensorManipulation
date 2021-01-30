@@ -139,12 +139,15 @@ public class MainActivity extends AppCompatActivity {
                 }
 
 
-                Log.d(TAG, "processData: Number of Sensor= "+Integer.parseInt(sessionCompletedData.getNumberOfSensors(),16));
-                Log.d(TAG, "processData: Sensor Data Length= "+COMPLETE_SENSOR_DATA.length());
+             //   Log.d(TAG, "processData: Number of Sensor= "+Integer.parseInt(sessionCompletedData.getNumberOfSensors(),16));
+               // Log.d(TAG, "processData: Sensor Data Length= "+COMPLETE_SENSOR_DATA.length());
                 for (int counter_1 = 0; counter_1 <sessionCompletedData.sensorID_sensorTypeList.size(); counter_1++) {
-                    Log.d(TAG, "onCreate: SENSOR_ID_TYPES "+"\n SENSOR ID= "+sessionCompletedData.sensorID_sensorTypeList.get(counter_1).getSensorID()+
-                            "\n SENSOR TYPE= "+sessionCompletedData.sensorID_sensorTypeList.get(counter_1).getSensorType()+
-                            "\n Number of Data = "+sessionCompletedData.sensorID_sensorTypeList.get(counter_1).getSensorIDData().size());
+                    Log.d(TAG, "SENSOR ID= "+sessionCompletedData.sensorID_sensorTypeList.get(counter_1).getSensorID()+" SENSOR TYPE= "+sessionCompletedData.sensorID_sensorTypeList.get(counter_1).getSensorType()+ " Number of Data = "+sessionCompletedData.sensorID_sensorTypeList.get(counter_1).getSensorIDData().size());
+
+                    for (int individualSensorData = 0; individualSensorData <sessionCompletedData.sensorID_sensorTypeList.get(counter_1).getSensorIDData().size() ; individualSensorData++) {
+                        Log.d(TAG, "processData: "+sessionCompletedData.sensorID_sensorTypeList.get(counter_1).getSensorIDData().get(individualSensorData)+",");
+                    }
+
                 }
 
 

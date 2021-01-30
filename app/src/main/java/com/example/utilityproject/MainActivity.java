@@ -95,6 +95,7 @@ public class MainActivity extends AppCompatActivity {
         SessionCompletedData sessionCompletedData =new SessionCompletedData();
         sessionCompletedData.setSensorCompletedDataConcatenated("");
         sessionCompletedData.sensorID_sensorTypeList=new ArrayList<>();
+        ArrayList<String> individdualSensordata=new ArrayList<String>();
         COMPLETE_SENSOR_DATA="";
 
         for (int i = 0; i <hexStringList.size() ; i++) {
@@ -114,10 +115,10 @@ public class MainActivity extends AppCompatActivity {
                 String stringValueForthisBlock=hexStringList.get(i);
                 String particularPacektToProcess=getStringOfParticularLength(stringValueForthisBlock);
                 while (particularPacektToProcess.length()>0){
-                    SensorID_SensorType sensorID_sensorType=new SensorID_SensorType();
+                    /*SensorID_SensorType sensorID_sensorType=new SensorID_SensorType();
                     sensorID_sensorType.setSensorID(particularPacektToProcess);
-                    sensorID_sensorType.setSensorType(particularPacektToProcess);
-                    sessionCompletedData.sensorID_sensorTypeList.add(sensorID_sensorType);
+                    sensorID_sensorType.setSensorType(particularPacektToProcess);*/
+                    sessionCompletedData.sensorID_sensorTypeList.add(new SensorID_SensorType(particularPacektToProcess,particularPacektToProcess,new ArrayList<String>()));
                     particularPacektToProcess=particularPacektToProcess.substring(6);
                 }
             }else if(hexStringList.get(i).substring(4,6).equalsIgnoreCase("FC")){
@@ -131,16 +132,48 @@ public class MainActivity extends AppCompatActivity {
 
 
             }else if(hexStringList.get(i).substring(4,6).equalsIgnoreCase("FB")){
-                Log.d(TAG, " SESSION ID= "+sessionCompletedData.getSessionId()+
+
+
+               int numberOFSensors=Integer.parseInt(sessionCompletedData.getNumberOfSensors(),16);
+
+
+
+
+
+              /*  Log.d(TAG, " SESSION ID= "+sessionCompletedData.getSessionId()+
                         "\n PLAYER ID "+sessionCompletedData.getPlayerId()+
                         "\n TIME STAMP= "+sessionCompletedData.getTimeStamp()+
                         "\n NUMBER OF SENSOR= "+sessionCompletedData.getNumberOfSensors()+
                         "\n Session Player Name= "+sessionCompletedData.getSessionPlayerName());
-                Log.d(TAG, "onCreate: SENSOR TYPE SENSOR ID SIZE LIST= "+sessionCompletedData.sensorID_sensorTypeList.size());
-                for (int counter = 0; counter < sessionCompletedData.sensorID_sensorTypeList.size(); counter++) {
-                    Log.d(TAG, "onCreate: SENSOR_ID_TYPES "+" SENSOR ID= "+sessionCompletedData.sensorID_sensorTypeList.get(counter).getSensorID()+" SENSOR TYPE= "+sessionCompletedData.sensorID_sensorTypeList.get(counter).getSensorType());
+                Log.d(TAG, "onCreate: SENSOR TYPE SENSOR ID SIZE LIST= "+sessionCompletedData.sensorID_sensorTypeList.size());*/
+             /*   for (int counter = 0; counter < sessionCompletedData.sensorID_sensorTypeList.size(); counter++) {
+                    Log.d(TAG, "onCreate: SENSOR_ID_TYPES "+" SENSOR ID= "+sessionCompletedData.sensorID_sensorTypeList.get(counter).getSensorID()+" SENSOR TYPE= "+sessionCompletedData.sensorID_sensorTypeList.get(counter).getSensorType()+" POSTION= "+counter);
                 }
+*/
                 Log.d(TAG, "onCreate: COMPLETE_SENSOR_DATA= "+COMPLETE_SENSOR_DATA+" Length= \n"+COMPLETE_SENSOR_DATA.length());
+
+                List<String> stringSplitted= splitEqually(COMPLETE_SENSOR_DATA,4);
+                int counter=0;
+                for (String indiviadualString:stringSplitted ) {
+                   // System.out.println("Each Sensor Data= "+indiviadualString+" Counter= "+counter);
+
+               ArrayList<String> eachIndividualSensorData= sessionCompletedData.sensorID_sensorTypeList.get(counter).getSensorIDData();
+                    eachIndividualSensorData.add(indiviadualString);
+                    counter++;
+                    if(counter==numberOFSensors-1){
+                        counter=0;
+                    }
+                }
+
+
+
+                for (int counter_1 = 0; counter < sessionCompletedData.sensorID_sensorTypeList.size(); counter_1++) {
+                    Log.d(TAG, "onCreate: SENSOR_ID_TYPES "+"\n SENSOR ID= "+sessionCompletedData.sensorID_sensorTypeList.get(counter_1).getSensorID()+
+                            "\n SENSOR TYPE= "+sessionCompletedData.sensorID_sensorTypeList.get(counter_1).getSensorType()+
+                            "\n Number of Data = "+sessionCompletedData.sensorID_sensorTypeList.get(counter_1).getSensorIDData().size());
+                }
+
+
 
             }
         }

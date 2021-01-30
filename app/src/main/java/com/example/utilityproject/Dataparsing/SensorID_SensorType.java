@@ -8,9 +8,10 @@ public class SensorID_SensorType {
     private ArrayList<String> sensorIDData;
 
 
-    public SensorID_SensorType(String sensorID, String sensorType) {
+    public SensorID_SensorType(String sensorID, String sensorType,ArrayList<String> sensorIDData_loc) {
         this.sensorID = sensorID.substring(0,4);
         this.sensorType =sensorType.substring(4,6);
+        this.sensorIDData=sensorIDData_loc;
     }
 
     public SensorID_SensorType() {

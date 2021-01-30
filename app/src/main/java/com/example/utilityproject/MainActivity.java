@@ -19,6 +19,7 @@ import java.nio.ByteBuffer;
 import java.util.ArrayList;
 import java.util.Date;
 
+import static com.example.utilityproject.UtilityClass.getOnlySensorDataPackets;
 import static com.example.utilityproject.UtilityClass.getStringOfParticularLength;
 
 public class MainActivity extends AppCompatActivity {
@@ -30,32 +31,13 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-     /*  // textView=(TextView)findViewById(R.id.textView) ;
-        System.out.println("Current Time Stamp= "+System.currentTimeMillis());
-        Date date=new Date(System.currentTimeMillis());
-        Date date2=new Date(Long.parseLong("0"));
-        Date date3=new Date(Long.parseLong("1579453294000"));
-        //  System.out.println("same date = "+date.compareTo(date3));
-      //  setTimeTextVisibility(date,date2,textView);
+            String data="100FFC00050A280A290A280A2B0A2D0A2C00";
+        System.out.println("------------------>"+data.substring(10,24+10));
+        processData();
 
- //       System.out.println(" Vinay "+convertHexStringToString("69756d00"));
+    }
 
-        byte [] x=longToBytes(268435455);
-
-        System.out.println(" bytetohex "+bytesToHex(x));
-
-        for (byte xdd:x ) {
-            System.out.println("Value-------------> "+xdd);
-        }
-
-            Integer i=Integer.reverseBytes(268435455);
-            byte [] Check=ByteBuffer.allocate(4).putInt(i).array();*/
-
-
-    //    System.out.println("DATA= "+getStringOfParticularLength("1002FB02"));
-
-
-
+    private void processData(){
         ArrayList<String> hexStringList=new ArrayList<String>();
         hexStringList.add("100DFF02000000016c45324500020B000000");
         hexStringList.add("1005FE546573740000000000000000000000");
@@ -109,7 +91,7 @@ public class MainActivity extends AppCompatActivity {
                 sessionCompletedData.setSessionPlayerName(packForthisValriable);
             }else if(hexStringList.get(i).substring(4,6).equalsIgnoreCase("FD")){
                 String stringValueForthisBlock=hexStringList.get(i);
-               String particularPacektToProcess=getStringOfParticularLength(stringValueForthisBlock);
+                String particularPacektToProcess=getStringOfParticularLength(stringValueForthisBlock);
                 while (particularPacektToProcess.length()>0){
                     sessionCompletedData.sensorID_sensorTypeList.add(new SensorID_SensorType(particularPacektToProcess,particularPacektToProcess));
                     particularPacektToProcess=particularPacektToProcess.substring(6);
@@ -119,7 +101,9 @@ public class MainActivity extends AppCompatActivity {
                  * Complete Sensor Data.
                  */
                 String stringValueForthisBlock=hexStringList.get(i);
-                COMPLETE_SENSOR_DATA=COMPLETE_SENSOR_DATA+getStringOfParticularLength(stringValueForthisBlock);
+
+                COMPLETE_SENSOR_DATA=COMPLETE_SENSOR_DATA+getOnlySensorDataPackets(stringValueForthisBlock);
+                Log.d(TAG, "processData: COMPLETE SENSOR DATA= "+COMPLETE_SENSOR_DATA);
 
 
             }else if(hexStringList.get(i).substring(4,6).equalsIgnoreCase("FB")){
@@ -135,7 +119,6 @@ public class MainActivity extends AppCompatActivity {
                 Log.d(TAG, "onCreate: COMPLETE_SENSOR_DATA= "+COMPLETE_SENSOR_DATA+" Length= \n"+COMPLETE_SENSOR_DATA.length());
             }
         }
-
     }
 
 
@@ -195,47 +178,6 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onPause() {
         super.onPause();
-    }
-
-
-    SessionCompletedData sessionCompletedData;
-    private void actionDataAvaliabel(String actionData){
-        if(actionData.substring(4,6).equalsIgnoreCase("FF")){
-            sessionCompletedData =new SessionCompletedData();
-            sessionCompletedData.setSessionId(actionData);
-            sessionCompletedData.setPlayerId(actionData);
-            sessionCompletedData.setSessionReadInterval(actionData);
-            sessionCompletedData.setNumberOfSensors(actionData);
-        }else     if(actionData.substring(4,6).equalsIgnoreCase("FE")){
-            sessionCompletedData.setSessionPlayerName(actionData);
-
-        }else  if(actionData.substring(4,6).equalsIgnoreCase("FD")){
-                sessionCompletedData.sensorID_sensorTypeList.add(new SensorID_SensorType(actionData.substring(2,4),actionData.substring(5,7)));
-        }
-        else  if(actionData.substring(4,6).equalsIgnoreCase("FC")){
-
-        }else if(actionData.substring(4,6).equalsIgnoreCase("FB")){
-            /**
-             * Process all data for required operation.
-             */
-
-            System.out.println(" Details= "+ sessionCompletedData.getNumberOfSensors());
-            System.out.println(" Details= "+ sessionCompletedData.getNumberOfSensors());
-            System.out.println(" Details= "+ sessionCompletedData.getNumberOfSensors());
-            System.out.println(" Details= "+ sessionCompletedData.getNumberOfSensors());
-            for (int i = 0; i < sessionCompletedData.sensorID_sensorTypeList.size() ; i++) {
-                SensorID_SensorType sensorID_sensorType= sessionCompletedData.sensorID_sensorTypeList.get(i);
-                System.out.println(" SENSOR ID "+sensorID_sensorType.getSensorID()+" value= "+sensorID_sensorType.getSensorType());
-            }
-            for (int i = 0; i < sessionCompletedData.sequenceNumberSensorData.size() ; i++) {
-                SequenceNumber_SensorData senquenceNumber= sessionCompletedData.sequenceNumberSensorData.get(i);
-                System.out.println(" Sequence Number ID "+senquenceNumber.getSensorData()+" Sensor data= "+senquenceNumber.getSequenceNumber());
-            }
-
-
-            sessionCompletedData =null;
-        }
-
     }
 
     @Override

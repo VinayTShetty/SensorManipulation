@@ -10,4 +10,12 @@ public class UtilityClass {
         String stringToExtract=extractedToReadValue.substring(0,convertedHexValue-2);
         return stringToExtract;
     }
+
+    public static String getOnlySensorDataPackets(String hexValueInput){
+        String getLengthToExtract=hexValueInput.substring(2,4);
+        int convertedHexValue=Integer.parseInt(getLengthToExtract,16);
+        convertedHexValue=convertedHexValue-3;
+        return hexValueInput.substring(10,convertedHexValue+10);
+
+    }
 }

@@ -125,6 +125,17 @@ public class MainActivity extends AppCompatActivity {
                 String stringValueForthisBlock=hexStringList.get(i);
                 COMPLETE_SENSOR_DATA=COMPLETE_SENSOR_DATA+getOnlySensorDataPackets(stringValueForthisBlock);
             }else if(hexStringList.get(i).substring(4,6).equalsIgnoreCase("FB")){
+
+                System.out.println("Session Information");
+
+                System.out.println("Session ID= "+sessionCompletedData.getSessionId());
+                System.out.println("Session Player  ID= "+sessionCompletedData.getPlayerId());
+                System.out.println("Session TimeStamp= "+sessionCompletedData.getTimeStamp());
+                System.out.println("Session ReadInterval = "+sessionCompletedData.getSessionReadInterval());
+                System.out.println("Session Number Of Sensors = "+sessionCompletedData.getNumberOfSensors());
+                System.out.println("Session Session Player Name= "+sessionCompletedData.getSessionPlayerName());
+
+
                int numberOFSensors=Integer.parseInt(sessionCompletedData.getNumberOfSensors(),16);
                 List<String> stringSplitted= splitEqually(COMPLETE_SENSOR_DATA,4);
 

@@ -133,6 +133,28 @@ public class MainActivity extends AppCompatActivity {
         hexStringList.add("1002FB03");
 
 
+        /**
+         * Example 3:-
+         */
+        /*hexStringList.add("100DFF02000000016c453245000202000000"); //Done
+        hexStringList.add("1005FE546573740000000000000000000000");// Done
+        hexStringList.add("1010FD000103000204000000000000000000");// Done
+        hexStringList.add("100DFC000100010002000300040005000000");//Done
+        hexStringList.add("100DFC000200010002000300040005000000");//Done
+        hexStringList.add("100DFC000300010002000300040005000000");//Done
+        hexStringList.add("100DFC000400010002000300040005000000");//Done
+        hexStringList.add("100DFC000500010002000300040005000000");//Done
+        hexStringList.add("1002FB02");//Done*/
+
+        /**
+         * Example 4
+         */
+    /*    hexStringList.add("100DFF02000000016c453245000202000000");//Done
+        hexStringList.add("1005FE546573740000000000000000000000");//Done
+        hexStringList.add("1010FD000103000204000000000000000000");//Done
+        hexStringList.add("100FFC000100010002000100020001000200");//Done
+        hexStringList.add("100BFC000200010002000100020000000000");//Done
+        hexStringList.add("1002FB02");//Done*/
 
 
         SessionCompletedData sessionCompletedData =new SessionCompletedData();
@@ -168,9 +190,9 @@ public class MainActivity extends AppCompatActivity {
                  */
                 String stringValueForthisBlock=hexStringList.get(i);
                 COMPLETE_SENSOR_DATA=COMPLETE_SENSOR_DATA+getOnlySensorDataPackets(stringValueForthisBlock);
-                System.out.println("COMPLETED SENSRO DATA= "+COMPLETE_SENSOR_DATA+" LENGTH= "+COMPLETE_SENSOR_DATA.length());
-            }else if(hexStringList.get(i).substring(4,6).equalsIgnoreCase("FB")){
 
+            }else if(hexStringList.get(i).substring(4,6).equalsIgnoreCase("FB")){
+                System.out.println("COMPLETED SENSRO DATA= "+COMPLETE_SENSOR_DATA+" LENGTH= "+COMPLETE_SENSOR_DATA.length());
                 System.out.println("Session Information");
 
                 System.out.println("Session ID= "+sessionCompletedData.getSessionId());
@@ -194,7 +216,8 @@ public class MainActivity extends AppCompatActivity {
                     }
                 }
                 for (int counter_1 = 0; counter_1 <sessionCompletedData.sensorID_sensorTypeList.size(); counter_1++) {
-                    System.out.println("\nSENSOR ID= "+sessionCompletedData.sensorID_sensorTypeList.get(counter_1).getSensorID()+" SENOR TYPE= "+sessionCompletedData.sensorID_sensorTypeList.get(counter_1).getSensorType()+" Number of Packets "+sessionCompletedData.sensorID_sensorTypeList.get(counter_1).getSensorIDData().size());
+                    System.out.println("\nSENSOR ID= "+sessionCompletedData.sensorID_sensorTypeList.get(counter_1).getSensorID()+" SENOR TYPE= "+sessionCompletedData.sensorID_sensorTypeList.get(counter_1).getSensorType());
+                    System.out.println("Sensor Completed Data= "+COMPLETE_SENSOR_DATA.length());
                     ArrayList <String> eachIndividualDatalist=sessionCompletedData.sensorID_sensorTypeList.get(counter_1).getSensorIDData();
                     System.out.println("CorresPonding Data Packets ");
                     for (String data:eachIndividualDatalist) {

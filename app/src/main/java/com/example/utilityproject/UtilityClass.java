@@ -16,8 +16,8 @@ public class UtilityClass {
         int convertedHexValue=Integer.parseInt(getLengthToExtract,16);
         convertedHexValue=convertedHexValue-1;
         convertedHexValue=convertedHexValue*2;
-        System.out.println(" Value Returened "+hexValueInput.substring(6,convertedHexValue+6));
-       return hexValueInput.substring(6,convertedHexValue+6);
+        System.out.println(" Value Returened "+hexValueInput.substring(10,convertedHexValue+6));
+       return hexValueInput.substring(10,convertedHexValue+6);
 
     }
 }

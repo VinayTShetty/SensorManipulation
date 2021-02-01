@@ -108,6 +108,7 @@ public class MainActivity extends AppCompatActivity {
                 sessionCompletedData.setPlayerId(packForthisValriable);
                 sessionCompletedData.setTimeStamp(packForthisValriable);
                 sessionCompletedData.setNumberOfSensors(packForthisValriable);
+                sessionCompletedData.setSessionReadInterval(packForthisValriable);
             }else if(hexStringList.get(i).substring(4,6).equalsIgnoreCase("FE")){
                 String packForthisValriable=hexStringList.get(i).toString();
                 sessionCompletedData.setSessionPlayerName(packForthisValriable);

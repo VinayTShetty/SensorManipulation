@@ -25,24 +25,11 @@ import static com.example.utilityproject.UtilityClass.getOnlySensorDataPackets;
 import static com.example.utilityproject.UtilityClass.getStringOfParticularLength;
 
 public class MainActivity extends AppCompatActivity {
-    TextView textView;
-    final Handler handler = new Handler(Looper.getMainLooper());
-    public static final String TAG=MainActivity.class.getName();
     private static String COMPLETE_SENSOR_DATA="";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-     /*   String sensordataToProcess="0A280A290A280A280A290A280A280A290A280A280A290A280A280A290A280A280A290A280A280A290A280A280A290A280A280A290A280A280A290A280A280A290A280A280A290A280A280A290A280A280A290A280A280A290A280A280A290A280A280A290A280A280A290A280A280A290A280A280A290A280A280A290A280A280A290A280A280A290A280A280A290A280A280A290A280A280A29";
-      List<String> stringSplitted= splitEqually(sensordataToProcess,4);
-      int counter=1;
-        for (String indiviadualString:stringSplitted ) {
-      //      System.out.println("Each Sensor Data= "+indiviadualString+" Counter= "+counter);
-            counter++;
-            if(counter>11){
-                counter=1;
-            }
-        }*/
        processData();
     }
 
@@ -160,7 +147,6 @@ public class MainActivity extends AppCompatActivity {
         SessionCompletedData sessionCompletedData =new SessionCompletedData();
         sessionCompletedData.setSensorCompletedDataConcatenated("");
         sessionCompletedData.sensorID_sensorTypeList=new ArrayList<>();
-        ArrayList<String> individdualSensordata=new ArrayList<String>();
         COMPLETE_SENSOR_DATA="";
 
         for (int i = 0; i <hexStringList.size() ; i++) {
@@ -230,52 +216,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    public byte[] longToBytes(long x) {
-        ByteBuffer buffer = ByteBuffer.allocate(Long.BYTES);
-        buffer.putLong(x);
-        return buffer.array();
-    }
 
-    private static final char[] HEX_ARRAY = "0123456789ABCDEF".toCharArray();
-    public static String bytesToHex(byte[] bytes) {
-        char[] hexChars = new char[bytes.length * 2];
-        for (int j = 0; j < bytes.length; j++) {
-            int v = bytes[j] & 0xFF;
-            hexChars[j * 2] = HEX_ARRAY[v >>> 4];
-            hexChars[j * 2 + 1] = HEX_ARRAY[v & 0x0F];
-        }
-        return new String(hexChars);
-    }
-
-
-
-    private void setTimeTextVisibility(Date presentDate, Date previousDate, TextView timeText){
-        if(presentDate.compareTo(previousDate)==0){
-            System.out.println("same date ");
-            timeText.setVisibility(View.GONE);
-        }else if(presentDate.compareTo(previousDate)==1){
-            System.out.println("1");
-            timeText.setVisibility(View.VISIBLE);
-            timeText.setText(presentDate.toString());
-            System.out.println("Demo application = "+presentDate.toString());
-            String dateWithoutTime = presentDate.toString().substring(0, 10);
-            System.out.println(" Demo application = "+dateWithoutTime);
-
-        }else if(presentDate.compareTo(previousDate)==-1){
-            System.out.println("-1");
-        }
-    }
-
-    private static String convertHexStringToString(String hexStringInput) {
-        String result = new String();
-        char[] charArray = hexStringInput.toCharArray();
-        for(int i = 0; i < charArray.length; i=i+2) {
-            String st = ""+charArray[i]+""+charArray[i+1];
-            char ch = (char)Integer.parseInt(st, 16);
-            result = result + ch;
-        }
-        return result;
-    }
 
 
     @Override

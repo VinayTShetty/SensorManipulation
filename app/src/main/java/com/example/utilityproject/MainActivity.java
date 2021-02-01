@@ -97,7 +97,7 @@ public class MainActivity extends AppCompatActivity {
         /**
          * Example 2
          */
-        hexStringList.add("100DFF03000000016c45324500020B000000");
+       /* hexStringList.add("100DFF03000000016c45324500020B000000");
         hexStringList.add("1005FE546573740000000000000000000000");
         hexStringList.add("1010FD000103000204000303000403000503");
         hexStringList.add("1010FD000603000704000803000903000a03");
@@ -130,7 +130,7 @@ public class MainActivity extends AppCompatActivity {
         hexStringList.add("100FFC001a00080009000a000b0001000200");
         hexStringList.add("100FFC001b00030004000500060007000800");
         hexStringList.add("1009FC001c0009000a000b00000000000000");
-        hexStringList.add("1002FB03");
+        hexStringList.add("1002FB03");*/
 
 
         /**

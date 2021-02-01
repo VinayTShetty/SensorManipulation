@@ -149,12 +149,12 @@ public class MainActivity extends AppCompatActivity {
         /**
          * Example 4
          */
-    /*    hexStringList.add("100DFF02000000016c453245000202000000");//Done
+        hexStringList.add("100DFF02000000016c453245000202000000");//Done
         hexStringList.add("1005FE546573740000000000000000000000");//Done
-        hexStringList.add("1010FD000103000204000000000000000000");//Done
+        hexStringList.add("1007FD000103000204000000000000000000");//Done
         hexStringList.add("100FFC000100010002000100020001000200");//Done
         hexStringList.add("100BFC000200010002000100020000000000");//Done
-        hexStringList.add("1002FB02");//Done*/
+        hexStringList.add("1002FB02");//Done
 
 
         SessionCompletedData sessionCompletedData =new SessionCompletedData();

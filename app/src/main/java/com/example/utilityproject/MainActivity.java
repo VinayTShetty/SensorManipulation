@@ -33,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        String sensordataToProcess="0A280A290A280A280A290A280A280A290A280A280A290A280A280A290A280A280A290A280A280A290A280A280A290A280A280A290A280A280A290A280A280A290A280A280A290A280A280A290A280A280A290A280A280A290A280A280A290A280A280A290A280A280A290A280A280A290A280A280A290A280A280A290A280A280A290A280A280A290A280A280A290A280A280A290A280A280A29";
+     /*   String sensordataToProcess="0A280A290A280A280A290A280A280A290A280A280A290A280A280A290A280A280A290A280A280A290A280A280A290A280A280A290A280A280A290A280A280A290A280A280A290A280A280A290A280A280A290A280A280A290A280A280A290A280A280A290A280A280A290A280A280A290A280A280A290A280A280A290A280A280A290A280A280A290A280A280A290A280A280A290A280A280A29";
       List<String> stringSplitted= splitEqually(sensordataToProcess,4);
       int counter=1;
         for (String indiviadualString:stringSplitted ) {
@@ -42,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
             if(counter>11){
                 counter=1;
             }
-        }
+        }*/
        processData();
     }
 
@@ -59,7 +59,10 @@ public class MainActivity extends AppCompatActivity {
 
     private void processData(){
         ArrayList<String> hexStringList=new ArrayList<String>();
-        hexStringList.add("100DFF02000000016c45324500020B000000");
+        /**
+         * Example 1
+         */
+        /*hexStringList.add("100DFF02000000016c45324500020B000000");
         hexStringList.add("1005FE546573740000000000000000000000");
         hexStringList.add("1010FD014D03015C04012D03019E03016603");
         hexStringList.add("1010FD014E03015D04012E03019F03016703");
@@ -90,7 +93,47 @@ public class MainActivity extends AppCompatActivity {
         hexStringList.add("100FFC00180A280A290A280A2B0A2D0A2C00");
         hexStringList.add("100FFC00190A280A290A280A2B0A2D0A2C00");
         hexStringList.add("100BFC001A0A280A290A280A2B0000000000");
-        hexStringList.add("1002FB02");
+        hexStringList.add("1002FB02");*/
+        /**
+         * Example 2
+         */
+        hexStringList.add("100DFF03000000016c45324500020B000000");
+        hexStringList.add("1005FE546573740000000000000000000000");
+        hexStringList.add("1010FD000103000204000303000403000503");
+        hexStringList.add("1010FD000603000704000803000903000a03");
+        hexStringList.add("1004FD000b03000000000000000000000000");
+        hexStringList.add("100FFC000100010002000300040005000600");
+        hexStringList.add("100FFC0002000700080009000a000b000100");
+        hexStringList.add("100FFC000300020003000400050006000700");
+        hexStringList.add("100FFC000400080009000a000b0001000200");
+        hexStringList.add("100FFC000500030004000500060007000800");
+        hexStringList.add("100FFC00060009000a000b00010002000300");
+        hexStringList.add("100FFC000700040005000600070008000900");
+        hexStringList.add("100FFC0008000a000b000100020003000400");
+        hexStringList.add("100FFC000900050006000700080009000a00");
+        hexStringList.add("100FFC000a000b0001000200030004000500");
+        hexStringList.add("100FFC000b0006000700080009000a000b00");
+        hexStringList.add("100FFC000c00010002000300040005000600");
+        hexStringList.add("100FFC000d000700080009000a000b000100");
+        hexStringList.add("100FFC000e00020003000400050006000700");
+        hexStringList.add("100FFC000f00080009000a000b0001000200");
+        hexStringList.add("100FFC001000030004000500060007000800");
+        hexStringList.add("100FFC00110009000a000b00010002000300");
+        hexStringList.add("100FFC001200040005000600070008000900");
+        hexStringList.add("100FFC0013000a000b000100020003000400");
+        hexStringList.add("100FFC001400050006000700080009000a00");
+        hexStringList.add("100FFC0015000b0001000200030004000500");
+        hexStringList.add("100FFC00160006000700080009000a000b00");
+        hexStringList.add("100FFC001700010002000300040005000600");
+        hexStringList.add("100FFC0018000700080009000a000b000100");
+        hexStringList.add("100FFC001900020003000400050006000700");
+        hexStringList.add("100FFC001a00080009000a000b0001000200");
+        hexStringList.add("100FFC001b00030004000500060007000800");
+        hexStringList.add("1009FC001c0009000a000b00000000000000");
+        hexStringList.add("1002FB03");
+
+
+
 
         SessionCompletedData sessionCompletedData =new SessionCompletedData();
         sessionCompletedData.setSensorCompletedDataConcatenated("");
@@ -125,6 +168,7 @@ public class MainActivity extends AppCompatActivity {
                  */
                 String stringValueForthisBlock=hexStringList.get(i);
                 COMPLETE_SENSOR_DATA=COMPLETE_SENSOR_DATA+getOnlySensorDataPackets(stringValueForthisBlock);
+                System.out.println("COMPLETED SENSRO DATA= "+COMPLETE_SENSOR_DATA+" LENGTH= "+COMPLETE_SENSOR_DATA.length());
             }else if(hexStringList.get(i).substring(4,6).equalsIgnoreCase("FB")){
 
                 System.out.println("Session Information");

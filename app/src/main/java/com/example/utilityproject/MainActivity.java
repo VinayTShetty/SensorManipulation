@@ -67,8 +67,8 @@ public class MainActivity extends AppCompatActivity   {
              DatePickerDialog datePickerDialog=new DatePickerDialog(MainActivity.this, new DatePickerDialog.OnDateSetListener() {
                  @Override
                  public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-
-
+                     month=month+1;
+                     System.out.println("TimeStamp_Data=  year= "+year+" Month= "+month+" Day of Month= "+dayOfMonth);
                  }
              },mYear,mMonth,mDay);
                 datePickerDialog.show();

@@ -131,6 +131,7 @@ public class MainActivity extends AppCompatActivity   {
         calendarLocal.set(Calendar.MINUTE, mins_input);
         timeStampConvertedData= calendarLocal.getTimeInMillis();
         System.out.println("TimeStamp_Data TimeInMilliSeconds= "+timeStampConvertedData);
+        timesetTimeStampView.setText("Time = "+calendarLocal.get(Calendar.HOUR)+":"+calendarLocal.get(Calendar.MINUTE)+"\n"+" TimeStamp = "+timeStampConvertedData);
         return timeStampConvertedData;
     }
 

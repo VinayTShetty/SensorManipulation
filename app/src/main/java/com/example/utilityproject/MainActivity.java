@@ -16,6 +16,8 @@ import android.widget.DatePicker;
 import android.widget.TextView;
 import android.widget.TimePicker;
 
+import org.w3c.dom.Text;
+
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.TimeZone;
@@ -135,4 +137,9 @@ public class MainActivity extends AppCompatActivity   {
         return timeStampConvertedData;
     }
 
-}
+
+    private void textViewSetDate_Time(TextView date_Time,Calendar calendar){
+
+        }
+    }
+

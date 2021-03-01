@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.TimePickerDialog;
 import android.content.Intent;
+import android.icu.text.SimpleDateFormat;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
@@ -31,13 +32,17 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 TimePickerDialog timePickerDialog = new TimePickerDialog(MainActivity.this, new TimePickerDialog.OnTimeSetListener() {
+                    @RequiresApi(api = Build.VERSION_CODES.N)
                     @Override
                     public void onTimeSet(TimePicker timePicker, int hourOfDay, int minutes) {
-                        Calendar combinedCal = new GregorianCalendar(TimeZone.getTimeZone("GMT"));
-                        combinedCal.set(2021, 11, 1);
-                        combinedCal.set(Calendar.HOUR_OF_DAY, hourOfDay);
-                        combinedCal.set(Calendar.MINUTE, minutes);
-                        Long timestamp = combinedCal.getTimeInMillis();
+                        Calendar calendarLocal = new GregorianCalendar(TimeZone.getDefault());
+                        SimpleDateFormat month_nameFormateer = new SimpleDateFormat("MM");
+                        String month = month_nameFormateer.format(calendarLocal.getTime());
+                        System.out.println("---> "+month);
+                        calendarLocal.set(2021, 11, 1);
+                        calendarLocal.set(Calendar.HOUR_OF_DAY, hourOfDay);
+                        calendarLocal.set(Calendar.MINUTE, minutes);
+                        Long timestamp = calendarLocal.getTimeInMillis();
                         timesetTimeStampView.setText(hourOfDay+":"+minutes+"\n"+"TimeStamp= "+timestamp);
                         System.out.println("TimeStamp= "+timestamp);
                     }

@@ -35,7 +35,7 @@ public class MainActivity extends AppCompatActivity   {
         setContentView(R.layout.activity_main);
         timeset=(Button)findViewById(R.id.buttonCLick);
         timesetTimeStampView=(TextView)findViewById(R.id.timeStamp_textView);
-
+        getCurrentDate();
         timeset.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -68,13 +68,21 @@ public class MainActivity extends AppCompatActivity   {
                  @Override
                  public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
 
+
                  }
-             },0,0,0);
+             },mYear,mMonth,mDay);
                 datePickerDialog.show();
             }
         });
 
     }
+
+   private void getCurrentDate(){
+       Calendar c = Calendar.getInstance();
+       mYear = c.get(Calendar.YEAR);
+       mMonth = c.get(Calendar.MONTH);
+       mDay = c.get(Calendar.DAY_OF_MONTH);
+   }
 
     @Override
     protected void onResume() {

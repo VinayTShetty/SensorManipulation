@@ -20,14 +20,14 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.TimeZone;
 
-public class MainActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {
+public class MainActivity extends AppCompatActivity   {
     Button timeset;
     TextView timesetTimeStampView;
     int hour,minutes,day;
     DatePickerDialog datepicker;
     final Calendar myCalendar = Calendar.getInstance();
 
-    int currentyear,currentMonth,currentDay;
+    private int mYear, mMonth, mDay, mHour, mMinute;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,8 +64,13 @@ public class MainActivity extends AppCompatActivity implements DatePickerDialog.
         timeset.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                com.example.utilityproject.Dataparsing.DatePicker datePickerFragment=new com.example.utilityproject.Dataparsing.DatePicker();
-                datePickerFragment.show(getSupportFragmentManager(), "DATE PICK");
+             DatePickerDialog datePickerDialog=new DatePickerDialog(MainActivity.this, new DatePickerDialog.OnDateSetListener() {
+                 @Override
+                 public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+
+                 }
+             },0,0,0);
+                datePickerDialog.show();
             }
         });
 
@@ -86,12 +91,4 @@ public class MainActivity extends AppCompatActivity implements DatePickerDialog.
         super.onActivityResult(requestCode, resultCode, data);
     }
 
-
-
-
-
-    @Override
-    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-
-    }
 }

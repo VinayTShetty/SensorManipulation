@@ -13,6 +13,8 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 
 import java.util.Calendar;
+import java.util.GregorianCalendar;
+import java.util.TimeZone;
 
 public class MainActivity extends AppCompatActivity {
     Button timeset;
@@ -31,8 +33,16 @@ public class MainActivity extends AppCompatActivity {
                 TimePickerDialog timePickerDialog = new TimePickerDialog(MainActivity.this, new TimePickerDialog.OnTimeSetListener() {
                     @Override
                     public void onTimeSet(TimePicker timePicker, int hourOfDay, int minutes) {
-                        timesetTimeStampView.setText(hourOfDay+":"+minutes);
+                        Calendar combinedCal = new GregorianCalendar(TimeZone.getTimeZone("GMT"));
+                        combinedCal.set(2021, 11, 1);
+                        combinedCal.set(Calendar.HOUR_OF_DAY, hourOfDay);
+                        combinedCal.set(Calendar.MINUTE, minutes);
+                        Long timestamp = combinedCal.getTimeInMillis();
+                        timesetTimeStampView.setText(hourOfDay+":"+minutes+"\n"+"TimeStamp= "+timestamp);
+                        System.out.println("TimeStamp= "+timestamp);
                     }
+
+
                 }, 0, 0, false);
                 timePickerDialog.show();
             }

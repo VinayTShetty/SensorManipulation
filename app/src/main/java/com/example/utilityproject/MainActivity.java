@@ -88,8 +88,6 @@ public class MainActivity extends AppCompatActivity   {
                 System.out.println("TimeStamp_Data=  Hours= "+hourOfDay+" Minutes= "+minutes);
                 convert_SelectedDate_Time_TimeStamp(mYear,mMonth,mDay,hourOfDay,minutes);
             }
-
-
         }, mHour, mMinute, false);
         timePickerDialog.show();
     }
@@ -133,7 +131,7 @@ public class MainActivity extends AppCompatActivity   {
          * 12 hours formatt discarding mins
          */
         calendar = Calendar.getInstance();
-        SimpleDateFormat sdf = new SimpleDateFormat("hh:mm:ss a");
+        SimpleDateFormat sdf = new SimpleDateFormat("hh:mm a");
         String test = sdf.format(calendar.getTime());
         date_Time.setText(test);
         Log.e("TEST", test);

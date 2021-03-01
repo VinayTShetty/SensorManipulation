@@ -3,13 +3,16 @@ import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.icu.text.SimpleDateFormat;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.TextView;
 import android.widget.TimePicker;
 
@@ -17,10 +20,15 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.TimeZone;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {
     Button timeset;
     TextView timesetTimeStampView;
     int hour,minutes,day;
+    DatePickerDialog datepicker;
+    final Calendar myCalendar = Calendar.getInstance();
+
+    int currentyear,currentMonth,currentDay;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,9 +59,16 @@ public class MainActivity extends AppCompatActivity {
                 }, 0, 0, false);
                 timePickerDialog.show();
             }
-
-
         });
+
+        timeset.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                com.example.utilityproject.Dataparsing.DatePicker datePickerFragment=new com.example.utilityproject.Dataparsing.DatePicker();
+                datePickerFragment.show(getSupportFragmentManager(), "DATE PICK");
+            }
+        });
+
     }
 
     @Override
@@ -72,4 +87,11 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
+
+
+
+    @Override
+    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+
+    }
 }

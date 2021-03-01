@@ -134,12 +134,18 @@ public class MainActivity extends AppCompatActivity   {
         timeStampConvertedData= calendarLocal.getTimeInMillis();
         System.out.println("TimeStamp_Data TimeInMilliSeconds= "+timeStampConvertedData);
         timesetTimeStampView.setText("Time = "+calendarLocal.get(Calendar.HOUR)+":"+calendarLocal.get(Calendar.MINUTE)+"\n"+" TimeStamp = "+timeStampConvertedData);
+        textViewSetDate_Time(timesetTimeStampView,calendarLocal);
         return timeStampConvertedData;
     }
 
 
-    private void textViewSetDate_Time(TextView date_Time,Calendar calendar){
-
+    @RequiresApi(api = Build.VERSION_CODES.N)
+    private void textViewSetDate_Time(TextView date_Time, Calendar calendar){
+        calendar = Calendar.getInstance();
+        SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss.SSS");
+        String test = sdf.format(calendar.getTime());
+        date_Time.setText(test);
+        Log.e("TEST", test);
         }
     }
 

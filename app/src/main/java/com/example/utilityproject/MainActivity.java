@@ -25,12 +25,7 @@ import java.util.TimeZone;
 public class MainActivity extends AppCompatActivity   {
     Button timeset;
     TextView timesetTimeStampView;
-    int hour,minutes,day;
-    DatePickerDialog datepicker;
-    final Calendar myCalendar = Calendar.getInstance();
-
     private int mYear, mMonth, mDay, mHour, mMinute;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,31 +33,6 @@ public class MainActivity extends AppCompatActivity   {
         timeset=(Button)findViewById(R.id.buttonCLick);
         timesetTimeStampView=(TextView)findViewById(R.id.timeStamp_textView);
         getCurrentDate();
-        timeset.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                TimePickerDialog timePickerDialog = new TimePickerDialog(MainActivity.this, new TimePickerDialog.OnTimeSetListener() {
-                    @RequiresApi(api = Build.VERSION_CODES.N)
-                    @Override
-                    public void onTimeSet(TimePicker timePicker, int hourOfDay, int minutes) {
-                        Calendar calendarLocal = new GregorianCalendar(TimeZone.getDefault());
-                        SimpleDateFormat month_nameFormateer = new SimpleDateFormat("MM");
-                        String month = month_nameFormateer.format(calendarLocal.getTime());
-                        System.out.println("---> "+month);
-                        calendarLocal.set(2021, 2, 1);
-                        calendarLocal.set(Calendar.HOUR_OF_DAY, hourOfDay);
-                        calendarLocal.set(Calendar.MINUTE, minutes);
-                        Long timestamp = calendarLocal.getTimeInMillis();
-                        timesetTimeStampView.setText(hourOfDay+":"+minutes+"\n"+"TimeStamp= "+timestamp);
-                        System.out.println("TimeStamp= "+timestamp);
-                    }
-
-
-                }, 0, 0, false);
-                timePickerDialog.show();
-            }
-        });
-
         timeset.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

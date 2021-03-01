@@ -67,8 +67,12 @@ public class MainActivity extends AppCompatActivity   {
              DatePickerDialog datePickerDialog=new DatePickerDialog(MainActivity.this, new DatePickerDialog.OnDateSetListener() {
                  @Override
                  public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                     /**
+                      * Time Picker Dialog is showing onclick of the Button.
+                      */
                      month=month+1;
                      System.out.println("TimeStamp_Data=  year= "+year+" Month= "+month+" Day of Month= "+dayOfMonth);
+                     show_TimePickerDialog();
                  }
              },mYear,mMonth,mDay);
                 datePickerDialog.show();
@@ -82,6 +86,15 @@ public class MainActivity extends AppCompatActivity   {
        mYear = c.get(Calendar.YEAR);
        mMonth = c.get(Calendar.MONTH);
        mDay = c.get(Calendar.DAY_OF_MONTH);
+       /**
+        * Picking up time from android.
+        */
+       mHour= c.get(Calendar.HOUR);// 24 HOURS formatt--->HOUR_OF_DAY
+       mMinute=c.get(Calendar.MINUTE);
+   }
+
+   private void getCurrentTime(){
+
    }
 
     @Override
@@ -97,6 +110,20 @@ public class MainActivity extends AppCompatActivity   {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+    }
+
+
+    private void show_TimePickerDialog(){
+        TimePickerDialog timePickerDialog = new TimePickerDialog(MainActivity.this, new TimePickerDialog.OnTimeSetListener() {
+            @RequiresApi(api = Build.VERSION_CODES.N)
+            @Override
+            public void onTimeSet(TimePicker timePicker, int hourOfDay, int minutes) {
+                System.out.println("TimeStamp_Data=  Hours= "+hourOfDay+" Minutes= "+minutes);
+            }
+
+
+        }, mHour, mMinute, false);
+        timePickerDialog.show();
     }
 
 }

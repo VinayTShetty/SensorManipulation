@@ -47,7 +47,7 @@ public class MainActivity extends AppCompatActivity   {
                         SimpleDateFormat month_nameFormateer = new SimpleDateFormat("MM");
                         String month = month_nameFormateer.format(calendarLocal.getTime());
                         System.out.println("---> "+month);
-                        calendarLocal.set(2021, 11, 1);
+                        calendarLocal.set(2021, 2, 1);
                         calendarLocal.set(Calendar.HOUR_OF_DAY, hourOfDay);
                         calendarLocal.set(Calendar.MINUTE, minutes);
                         Long timestamp = calendarLocal.getTimeInMillis();
@@ -67,11 +67,9 @@ public class MainActivity extends AppCompatActivity   {
              DatePickerDialog datePickerDialog=new DatePickerDialog(MainActivity.this, new DatePickerDialog.OnDateSetListener() {
                  @Override
                  public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                     /**
-                      * Time Picker Dialog is showing onclick of the Button.
-                      */
-                     month=month+1;
-                     System.out.println("TimeStamp_Data=  year= "+year+" Month= "+month+" Day of Month= "+dayOfMonth);
+                       mYear=year;
+                       mMonth=month;
+                       mDay=dayOfMonth;
                      show_TimePickerDialog();
                  }
              },mYear,mMonth,mDay);
@@ -93,9 +91,6 @@ public class MainActivity extends AppCompatActivity   {
        mMinute=c.get(Calendar.MINUTE);
    }
 
-   private void getCurrentTime(){
-
-   }
 
     @Override
     protected void onResume() {
@@ -119,11 +114,24 @@ public class MainActivity extends AppCompatActivity   {
             @Override
             public void onTimeSet(TimePicker timePicker, int hourOfDay, int minutes) {
                 System.out.println("TimeStamp_Data=  Hours= "+hourOfDay+" Minutes= "+minutes);
+                convert_SelectedDate_Time_TimeStamp(mYear,mMonth,mDay,hourOfDay,minutes);
             }
 
 
         }, mHour, mMinute, false);
         timePickerDialog.show();
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.N)
+    private long convert_SelectedDate_Time_TimeStamp(int year_input, int month_input, int date_input, int hour_input, int mins_input){
+        long timeStampConvertedData=0;
+        Calendar calendarLocal = new GregorianCalendar(TimeZone.getDefault());
+        calendarLocal.set(year_input, month_input, date_input);
+        calendarLocal.set(Calendar.HOUR_OF_DAY, hour_input);
+        calendarLocal.set(Calendar.MINUTE, mins_input);
+        timeStampConvertedData= calendarLocal.getTimeInMillis();
+        System.out.println("TimeStamp_Data TimeInMilliSeconds= "+timeStampConvertedData);
+        return timeStampConvertedData;
     }
 
 }

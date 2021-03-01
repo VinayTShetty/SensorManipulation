@@ -128,7 +128,7 @@ public class MainActivity extends AppCompatActivity   {
         Log.e("TEST", test);*/
 
         /**
-         * 12 hours formatt discarding mins
+         * 12 hours formatt discarding mins.
          */
         calendar = Calendar.getInstance();
         SimpleDateFormat sdf = new SimpleDateFormat("hh:mm a");

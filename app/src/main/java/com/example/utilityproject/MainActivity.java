@@ -19,6 +19,7 @@ import android.widget.TimePicker;
 import org.w3c.dom.Text;
 
 import java.util.Calendar;
+import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.TimeZone;
 
@@ -45,13 +46,32 @@ public class MainActivity extends AppCompatActivity   {
                      show_TimePickerDialog();
                  }
              },mYear,mMonth,mDay);
-                datePickerDialog.getDatePicker().setMaxDate(System.currentTimeMillis());
+
+
+                Calendar c1 = Calendar.getInstance();
+
+                //first day of week
+                c1.set(Calendar.DAY_OF_WEEK, 1);
+
+                int year1 = c1.get(Calendar.YEAR);
+                int month1 = c1.get(Calendar.MONTH)+1;
+                int day1 = c1.get(Calendar.DAY_OF_MONTH);
 
 
 
-                
+                Calendar c2 = Calendar.getInstance();
+                //last day of week
+                c2.set(Calendar.DAY_OF_WEEK, 7);
+
+                int year7 = c2.get(Calendar.YEAR);
+                int month7 = c2.get(Calendar.MONTH)+1;
+                int day7 = c2.get(Calendar.DAY_OF_MONTH);
 
 
+
+
+                datePickerDialog.getDatePicker().setMinDate(c1.getTimeInMillis());
+                datePickerDialog.getDatePicker().setMaxDate(c2.getTimeInMillis());
                 datePickerDialog.show();
             }
         });

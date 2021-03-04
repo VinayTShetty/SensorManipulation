@@ -45,6 +45,13 @@ public class MainActivity extends AppCompatActivity   {
                      show_TimePickerDialog();
                  }
              },mYear,mMonth,mDay);
+                datePickerDialog.getDatePicker().setMaxDate(System.currentTimeMillis());
+
+
+
+                
+
+
                 datePickerDialog.show();
             }
         });

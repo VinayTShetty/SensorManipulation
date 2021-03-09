@@ -157,7 +157,7 @@ public class MainActivity extends AppCompatActivity   {
         /**
          * 12 hours formatt discarding mins.
          */
-        calendar = Calendar.getInstance();
+       // calendar = Calendar.getInstance();
         SimpleDateFormat sdf = new SimpleDateFormat("hh:mm a");
         String test = sdf.format(calendar.getTime());
         date_Time.setText(test);

@@ -96,7 +96,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-            getDate(1615960068);
+            getDateFromTimeStamp(1615987800);
         }
     }
 
@@ -198,11 +198,23 @@ public class MainActivity extends AppCompatActivity {
      * This method is used to get Date From TimeStamp.
      *
      */
+    @RequiresApi(api = Build.VERSION_CODES.N)
     private String getDateFromTimeStamp(long time) {
         Calendar cal = Calendar.getInstance(Locale.ENGLISH);
         cal.setTimeInMillis(time * 1000);
+
+        /**
+         * Date
+         */
         String date = DateFormat.format("dd-MM-yyyy", cal).toString();
-        timesetTimeStampView.setText("Curent Time--->"+date);
+       // timesetTimeStampView.setText("Curent Time--->"+date);
+
+        /**
+         * This logic is giving both Date and Time.
+         */
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        Date currenTimeZone = (Date) cal.getTime();
+        timesetTimeStampView.setText("Curent Time--->"+sdf.format(currenTimeZone));
         return date;
     }
 }

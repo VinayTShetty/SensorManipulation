@@ -96,7 +96,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-            getDateFromTimeStamp(1615987800);
+            getDateFromTimeStamp(1615961388);
         }
     }
 
@@ -212,9 +212,10 @@ public class MainActivity extends AppCompatActivity {
         /**
          * This logic is giving both Date and Time.
          */
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+       SimpleDateFormat Date_Time_both = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        SimpleDateFormat time_12_hours = new SimpleDateFormat("hh.mm aa");
         Date currenTimeZone = (Date) cal.getTime();
-        timesetTimeStampView.setText("Curent Time--->"+sdf.format(currenTimeZone));
+        timesetTimeStampView.setText("Curent Time--->"+time_12_hours.format(currenTimeZone));
         return date;
     }
 }

@@ -70,8 +70,8 @@ public class MainActivity extends AppCompatActivity   {
 
 
 
-                datePickerDialog.getDatePicker().setMinDate(c1.getTimeInMillis());
-                datePickerDialog.getDatePicker().setMaxDate(c2.getTimeInMillis());
+                datePickerDialog.getDatePicker().setMinDate(System.currentTimeMillis()-1000);
+             //   datePickerDialog.getDatePicker().setMaxDate(c2.getTimeInMillis());
                 datePickerDialog.show();
             }
         });

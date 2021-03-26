@@ -20,6 +20,7 @@ import android.widget.TimePicker;
 
 import org.w3c.dom.Text;
 
+import java.math.BigInteger;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -76,7 +77,12 @@ public class MainActivity extends AppCompatActivity {
                 datePickerDialog.show();
             }
         });
+        System.out.println("Binary Vlaue= "+hexToBin("127"));
 
+    }
+
+    static String hexToBin(String s) {
+        return new BigInteger(s, 16).toString(2);
     }
 
     private void getCurrentDate() {

@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.Intent;
+import android.icu.text.DateFormat;
 import android.icu.text.SimpleDateFormat;
 import android.os.Build;
 import android.os.Bundle;
@@ -21,12 +22,14 @@ import org.w3c.dom.Text;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.Locale;
 import java.util.TimeZone;
 
 public class MainActivity extends AppCompatActivity   {
     Button timeset;
     TextView timesetTimeStampView;
     private int mYear, mMonth, mDay, mHour, mMinute;
+    @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,6 +37,7 @@ public class MainActivity extends AppCompatActivity   {
         timeset=(Button)findViewById(R.id.buttonCLick);
         timesetTimeStampView=(TextView)findViewById(R.id.timeStamp_textView);
         getCurrentDate();
+        System.out.println("GMT_TIME= "+convertTimeStamptoGMT(1*3600));
         timeset.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -71,14 +75,32 @@ public class MainActivity extends AppCompatActivity   {
 
 
                 datePickerDialog.getDatePicker().setMinDate(System.currentTimeMillis()-1000);
-             //   datePickerDialog.getDatePicker().setMaxDate(c2.getTimeInMillis());
+                datePickerDialog.getDatePicker().setMaxDate(c2.getTimeInMillis());
                 datePickerDialog.show();
             }
         });
 
     }
 
-   private void getCurrentDate(){
+
+    /**
+     *
+     * This method is used to convert the timeStamp to GMT timings.
+     *  link:-https://stackoverflow.com/questions/6014903/getting-gmt-time-with-android#:~:text=text.,%22))%3B%20String%20gmtTime%20%3D%20dfgmt.
+     */
+    private String convertTimeStamptoGMT(int timeStamp){
+        android.icu.util.Calendar cal = android.icu.util.Calendar.getInstance(android.icu.util.TimeZone.getTimeZone("GMT"));
+        cal.setTimeInMillis(timeStamp*1000);
+        Date currentLocalTime = cal.getTime();
+//        DateFormat date = new SimpleDateFormat("dd-MM-yyy HH:mm:ss z");  // To get all details including year etc..
+        DateFormat date = new SimpleDateFormat("hh.mm aa");
+        date.setTimeZone(android.icu.util.TimeZone.getTimeZone("GMT"));
+        String localTime = date.format(currentLocalTime);
+        System.out.println("Time ----------->"+localTime);
+        return  localTime;
+    }
+
+    private void getCurrentDate(){
        Calendar c = Calendar.getInstance();
        mYear = c.get(Calendar.YEAR);
        mMonth = c.get(Calendar.MONTH);
